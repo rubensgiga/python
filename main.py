@@ -151,7 +151,7 @@ async def klyatva(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def main() -> None:
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
-    # Регистрация команд
+
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("я_готов", ya_gotov))
     app.add_handler(CommandHandler("отчет", otchet))
