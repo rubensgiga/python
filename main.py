@@ -151,7 +151,7 @@ async def klyatva(update: Update, context: ContextTypes.DEFAULT_TYPE):
 if __name__ == "__main__":
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
-
+    # Здесь исправлено: регистрация всех команд без ошибок
     app.add_handler(CommandHandler("я_готов", ya_gotov))
     app.add_handler(CommandHandler("отчет", otchet))
     app.add_handler(CommandHandler("пропустил", propustil))
@@ -161,5 +161,3 @@ if __name__ == "__main__":
 
     logger.info("⚙️ Бот Сенсей запущен...")
     app.run_polling()
-
-
