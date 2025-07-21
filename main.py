@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import sqlite3
 import datetime
 import random
-import logging  # Добавлено логирование
+import logging  
 
 BOT_TOKEN = "7081150298:AAET-CUC2OsIElP6n2kDDihM-v6HGt-ybPo"
 
