@@ -44,8 +44,7 @@ if conn is not None:
     create_table(conn)
 else:
     logger.critical("Не удалось подключиться к базе данных. Бот не будет работать.")
-    exit() # Выходим, если нет подключения к базе данных
-
+    exit()
 
 MOTIVATION = [
     "Слабость — это выбор. Как и сила.",
@@ -61,7 +60,6 @@ PUNISHMENT = [
     "Молчание — позор. Действие — путь.",
     "Хочешь быть гением? Терпи. И делай.",
 ]
-
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
@@ -92,15 +90,15 @@ async def ya_gotov(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def otchet(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = ' '.join(context.args)
-    user_id = update.effective_user.id  # Получаем ID пользователя
+    user_id = update.effective_user.id
     if not text:
         await update.message.reply_text("Напиши свой отчёт после команды, воин.")
         return
     try:
-
+        # Можно дополнительно сохранять отчёты, если нужно
         await update.message.reply_text("📝 Отчёт принят. Твоя дисциплина крепнет.")
-        logger.info(f"Пользователь {user_id} отправил отчет: {text[:50]}...") #Логируем начало отчета
-    except Exception as e:  # Ловим более общие исключения
+        logger.info(f"Пользователь {user_id} отправил отчет: {text[:50]}...")
+    except Exception as e:
         logger.error(f"Ошибка при обработке отчета: {e}")
         await update.message.reply_text("❌ Ошибка при обработке отчета. Попробуйте позже.")
 
@@ -150,17 +148,16 @@ async def klyatva(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     logger.info(f"Пользователь {user.id} запросил 'клятву'")
 
-
 def main() -> None:
-  app = ApplicationBuilder().token(BOT_TOKEN).build()
+    app = ApplicationBuilder().token(BOT_TOKEN).build()
 
-app.add_handler(CommandHandler("/start", start))
-app.add_handler(CommandHandler("/я_готов", ya_gotov))
-app.add_handler(CommandHandler("/отчет", otchet))
-app.add_handler(CommandHandler("/пропустил", propustil))
-app.add_handler(CommandHandler("/накажи", nakazhi))
-app.add_handler(CommandHandler("/статус", status))
-app.add_handler(CommandHandler("/клятва", klyatva))
+    app.add_handler(CommandHandler("/start", start))
+    app.add_handler(CommandHandler("/я_готов", ya_gotov))
+    app.add_handler(CommandHandler("/отчет", otchet))
+    app.add_handler(CommandHandler("/пропустил", propustil))
+    app.add_handler(CommandHandler("/накажи", nakazhi))
+    app.add_handler(CommandHandler("/статус", status))
+    app.add_handler(CommandHandler("/клятва", klyatva))
 
     logger.info("⚙️ Бот Сенсей запущен...")
     app.run_polling()
