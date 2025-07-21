@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import sqlite3
 import datetime
 import random
-import logging  
+import logging
 
 BOT_TOKEN = "7081150298:AAET-CUC2OsIElP6n2kDDihM-v6HGt-ybPo"
 
@@ -151,13 +151,14 @@ async def klyatva(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def main() -> None:
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
-    app.add_handler(CommandHandler("/start", start))
-    app.add_handler(CommandHandler("/я_готов", ya_gotov))
-    app.add_handler(CommandHandler("/отчет", otchet))
-    app.add_handler(CommandHandler("/пропустил", propustil))
-    app.add_handler(CommandHandler("/накажи", nakazhi))
-    app.add_handler(CommandHandler("/статус", status))
-    app.add_handler(CommandHandler("/клятва", klyatva))
+    # Регистрация команд
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("я_готов", ya_gotov))
+    app.add_handler(CommandHandler("отчет", otchet))
+    app.add_handler(CommandHandler("пропустил", propustil))
+    app.add_handler(CommandHandler("накажи", nakazhi))
+    app.add_handler(CommandHandler("статус", status))
+    app.add_handler(CommandHandler("клятва", klyatva))
 
     logger.info("⚙️ Бот Сенсей запущен...")
     app.run_polling()
