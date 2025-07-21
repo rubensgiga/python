@@ -152,15 +152,15 @@ async def klyatva(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main() -> None:
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
+  app = ApplicationBuilder().token(BOT_TOKEN).build()
 
-    app.add_handler(CommandHandler("/start", start))  # Исправлено!
-    app.add_handler(CommandHandler("/я_готов", ya_gotov))  # Исправлено!
-    app.add_handler(CommandHandler("/отчет", otchet))  # Исправлено!
-    app.add_handler(CommandHandler("/пропустил", propustil))  # Исправлено!
-    app.add_handler(CommandHandler("/накажи", nakazhi))  # Исправлено!
-    app.add_handler(CommandHandler("/статус", status))  # Исправлено!
-    app.add_handler(CommandHandler("/клятва", klyatva))  # Исправлено!
+app.add_handler(CommandHandler("/start", start))
+app.add_handler(CommandHandler("/я_готов", ya_gotov))
+app.add_handler(CommandHandler("/отчет", otchet))
+app.add_handler(CommandHandler("/пропустил", propustil))
+app.add_handler(CommandHandler("/накажи", nakazhi))
+app.add_handler(CommandHandler("/статус", status))
+app.add_handler(CommandHandler("/клятва", klyatva))
 
     logger.info("⚙️ Бот Сенсей запущен...")
     app.run_polling()
