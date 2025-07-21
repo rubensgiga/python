@@ -7,7 +7,6 @@ import logging  # Добавлено логирование
 
 BOT_TOKEN = "7081150298:AAET-CUC2OsIElP6n2kDDihM-v6HGt-ybPo"
 
-
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
@@ -47,6 +46,7 @@ else:
     logger.critical("Не удалось подключиться к базе данных. Бот не будет работать.")
     exit() # Выходим, если нет подключения к базе данных
 
+
 MOTIVATION = [
     "Слабость — это выбор. Как и сила.",
     "Ты либо куют тебя, либо ты ржавеешь.",
@@ -62,11 +62,12 @@ PUNISHMENT = [
     "Хочешь быть гением? Терпи. И делай.",
 ]
 
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     logger.info(f"Пользователь {user.id} ({user.username}) запустил команду /start")
     await update.message.reply_text(
-        f"⚔️ Привет, воин {user.first_name or user.username or 'Неизвестный'}. Я — Сенсей. Готов следовать Пути?\n\n"
+        f"⚔️ Привет, воин {user.first_name or user.username or 'Неизвестный'}. Я — Сэнсей. Готов следовать Пути?\n\n"
         "Команды:\n"
         "/я_готов — начать день\n"
         "/отчет <текст> — отправь результат\n"
@@ -96,6 +97,7 @@ async def otchet(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Напиши свой отчёт после команды, воин.")
         return
     try:
+
         await update.message.reply_text("📝 Отчёт принят. Твоя дисциплина крепнет.")
         logger.info(f"Пользователь {user_id} отправил отчет: {text[:50]}...") #Логируем начало отчета
     except Exception as e:  # Ловим более общие исключения
@@ -148,16 +150,17 @@ async def klyatva(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     logger.info(f"Пользователь {user.id} запросил 'клятву'")
 
+
 def main() -> None:
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("я_готов", ya_gotov))
-    app.add_handler(CommandHandler("отчет", otchet))
-    app.add_handler(CommandHandler("пропустил", propustil))
-    app.add_handler(CommandHandler("накажи", nakazhi))
-    app.add_handler(CommandHandler("статус", status))
-    app.add_handler(CommandHandler("клятва", klyatva))
+    app.add_handler(CommandHandler("/start", start))  # Исправлено!
+    app.add_handler(CommandHandler("/я_готов", ya_gotov))  # Исправлено!
+    app.add_handler(CommandHandler("/отчет", otchet))  # Исправлено!
+    app.add_handler(CommandHandler("/пропустил", propustil))  # Исправлено!
+    app.add_handler(CommandHandler("/накажи", nakazhi))  # Исправлено!
+    app.add_handler(CommandHandler("/статус", status))  # Исправлено!
+    app.add_handler(CommandHandler("/клятва", klyatva))  # Исправлено!
 
     logger.info("⚙️ Бот Сенсей запущен...")
     app.run_polling()
