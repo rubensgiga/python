@@ -148,15 +148,19 @@ async def klyatva(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     logger.info(f"Пользователь {user.id} запросил 'клятву'")
 
-if __name__ == "__main__":
+def main() -> None:
     app = ApplicationBuilder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("я_готов", ya_gotov))
-    app.add_handler(CommandHandler("отчет", otchet))
-    app.add_handler(CommandHandler("пропустил", propustil))
-    app.add_handler(CommandHandler("накажи", nakazhi))
-    app.add_handler(CommandHandler("статус", status))
-    app.add_handler(CommandHandler("клятва", klyatva))
+
+    app.add_handler(CommandHandler("/start", start))
+    app.add_handler(CommandHandler("/я_готов", ya_gotov))
+    app.add_handler(CommandHandler("/отчет", otchet))
+    app.add_handler(CommandHandler("/пропустил", propustil))
+    app.add_handler(CommandHandler("/накажи", nakazhi))
+    app.add_handler(CommandHandler("/статус", status))
+    app.add_handler(CommandHandler("/клятва", klyatva))
 
     logger.info("⚙️ Бот Сенсей запущен...")
     app.run_polling()
+
+if __name__ == '__main__':
+    main()
